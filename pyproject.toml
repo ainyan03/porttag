@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "porttag"
+dynamic = ["version"]
+description = "USB 接続された ESP32 系デバイスを一覧し、個体に名前を付けて取り違えを防ぐ CLI"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+dependencies = ["pyserial>=3.5"]
+
+[project.optional-dependencies]
+probe = ["esptool>=4.0"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+porttag = "porttag.cli:main"
+
+[tool.hatch.version]
+path = "src/porttag/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/porttag"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
